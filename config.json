@@ -1,19 +1,13 @@
 {
-  "base_url": "https://wutali-nextjs-netlify-blog.netlify.app",
-  "site_title": "Next.js Netlify Blog",
-  "site_description": "Next.js blog template for Netlify",
+  "base_url": "https://next-recept.kohlin.info",
+  "site_title": "Kohlin's recept",
+  "site_description": "Goda recept som är bra att äta",
   "site_keywords": [
-    {
-      "keyword": "Next.js"
-    },
-    {
-      "keyword": "Netlify"
-    },
-    {
-      "keyword": "React"
-    }
+    "recept",
+    "ketogen",
+    "mat"
   ],
   "posts_per_page": 5,
-  "twitter_account": "@my-account",
-  "github_account": "wutali"
+  "twitter_account": "@jkohin",
+  "github_account": "jkohlin"
 }
