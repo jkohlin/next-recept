@@ -11,7 +11,7 @@ export default function PostItem({ post }: Props) {
     <Link href={"/posts/" + post.slug}>
       <a>
         <Date date={parseISO(post.date)} />
-        <h2>{post.title}</h2>
+        <h2 className="recept">{post.title}</h2>
         <style jsx>
           {`
             a {

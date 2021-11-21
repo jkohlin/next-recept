@@ -4,6 +4,7 @@ backend:
 media_folder: public/images
 public_folder: /images
 publish_mode: editorial_workflow
+locale: sv
 
 collections:
   - name: "config"
@@ -89,7 +90,7 @@ collections:
                 hint: "Tag name for displaying on the site"
 
   - name: "posts"
-    label: "Posts"
+    label: "Recept"
     folder: "content/posts/"
     extension: "mdx"
     format: "frontmatter"

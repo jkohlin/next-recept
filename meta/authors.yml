@@ -1,6 +1,9 @@
 authors:
-  - slug: wutali
-    name: Takahiro Fujiwara
+  - slug: kojo
+    name: Johan Kohlin
     introduction:
-      Co-founder and CTO at Fuller, Inc. / Software & Data Engineer /
-      Python / Golang / React
+      Glad prick
+  - slug: koma
+    name: Martina Kohlin
+    introduction:
+      Master of ceremony

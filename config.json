@@ -13,7 +13,7 @@
       "keyword": "Mat"
     }
   ],
-  "posts_per_page": 5,
+  "posts_per_page": 100,
   "twitter_account": "@jkohlin",
   "github_account": "jkohlin"
 }

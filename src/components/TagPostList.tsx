@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { PostContent } from "../lib/posts";
 import { TagContent } from "../lib/tags";
 import PostItem from "./PostItem";
 import Pagination from "./Pagination";
+import List from '../lib/list'
 
 type Props = {
   posts: PostContent[];
@@ -13,12 +14,17 @@ type Props = {
   };
 };
 export default function TagPostList({ posts, tag, pagination }: Props) {
+  useEffect(() => {
+    const userList = new List('receptlista', {valueNames: ['recept']});
+    userList.sort('recept', { order: "asc" })
+  } );
+
   return (
-    <div className={"container"}>
+    <div className={"container"} id="receptlista">
       <h1>
         All posts / <span>{tag.name}</span>
       </h1>
-      <ul>
+      <ul className="list">
         {posts.map((it, i) => (
           <li key={i}>
             <PostItem post={it} />
