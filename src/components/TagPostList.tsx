@@ -17,7 +17,7 @@ export default function TagPostList({ posts, tag, pagination }: Props) {
   useEffect(() => {
     const userList = new List('receptlista', {valueNames: ['recept']});
     userList.sort('recept', { order: "asc" })
-  } );
+  } , [posts]);
 
   return (
     <div className={"container"} id="receptlista">
