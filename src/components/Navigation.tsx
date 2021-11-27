@@ -14,16 +14,16 @@ export default function Navigation() {
       <Burger active={active} onClick={() => setActive(!active)} />
       <div className={"container " + (active ? "active" : "")}>
         <ul>
-          <li>
+          {/* <li>
             <Link href="/">
               <a className={router.pathname === "/posts" ? "active" : null}>Hem</a>
             </Link>
-          </li>
+          </li> */}
           <li>
             <Link href="/posts/">
               <a
                 className={
-                  router.pathname.startsWith("/posts/") ? "active" : null
+                  router.pathname.startsWith("/") ? "active" : null
                 }
               >
                 Alla recept

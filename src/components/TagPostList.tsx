@@ -20,20 +20,16 @@ export default function TagPostList({ posts, tag, pagination }: Props) {
   
   useEffect(() => {
     const sortList = new List('receptlista', {valueNames: ['recept']});
+    console.log(sortList);
+    
     sortList.sort('recept', { order: "asc" })
-    console.log('posts updated');
     
     return () => {
-      console.log('unmounted');
       setFilter('');
       if (searchBar && searchBar.current && searchBar.current.value) searchBar.current.value = '';
     }
   } , []);
 
-  useEffect(() => {
-    console.log('search updated');
-    
-  } , [filter]);
   return (
     <div className={"container"} id="receptlista">
       <h1>

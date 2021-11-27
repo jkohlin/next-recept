@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { PostContent } from "../lib/posts";
 import PostItem from "./PostItem";
 import TagLink from "./TagLink";
 import Pagination from "./Pagination";
 import { TagContent } from "../lib/tags";
+import List from '../lib/list'
 
 type Props = {
   posts: PostContent[];
@@ -14,11 +15,29 @@ type Props = {
   };
 };
 export default function PostList({ posts, tags, pagination }: Props) {
+  const searchBar = useRef(null);
+  let [filter, setFilter] = useState('');
+
+  useEffect(() => {
+    const sortList = new List('receptlista', {valueNames: ['recept']});
+    sortList.sort('recept', { order: "asc" })
+    
+    return () => {
+      setFilter('');
+      if (searchBar && searchBar.current && searchBar.current.value) searchBar.current.value = '';
+    }
+  } , [posts]);
+
   return (
     <div className={"container"}>
-      <div className={"posts"}>
-        <ul className={"post-list"}>
-          {posts.map((it, i) => (
+      <div className={"posts"} id={"receptlista"}>
+        <nav className="search-bar">
+          <input ref={searchBar} 
+          onChange={(ev: React.ChangeEvent<HTMLInputElement>,): void => setFilter(searchBar.current.value.toUpperCase())} 
+          type="text" className="filter" placeholder="sök recept" />
+        </nav>
+        <ul className={"post-list list"}>
+          {posts.filter((post)=>post.title.toUpperCase().includes(filter)).map((it, i) => (
             <li key={i}>
               <PostItem post={it} />
             </li>
@@ -33,13 +52,13 @@ export default function PostList({ posts, tags, pagination }: Props) {
           }}
         />
       </div>
-      <ul className={"categories"}>
+      {/* <ul className={"categories"}>
         {tags.map((it, i) => (
           <li key={i}>
             <TagLink tag={it} />
           </li>
         ))}
-      </ul>
+      </ul> */}
       <style jsx>{`
         .container {
           display: flex;
@@ -48,6 +67,16 @@ export default function PostList({ posts, tags, pagination }: Props) {
           width: 100%;
           padding: 0 1.5rem;
         }
+        .search-bar {
+            width: 150px;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+          }
+        .search-bar > input {
+          padding: 0.5rem 1rem;
+          border-radius: 1.2rem;
+        }
+
         ul {
           margin: 0;
           padding: 0;
