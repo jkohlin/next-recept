@@ -14,6 +14,7 @@ export default function Layout({ children }: Props) {
         <link rel="apple-touch-icon" href="/icon.png" />
         <meta name="theme-color" content="#fff" />
       </Head>
+      <header><h1>Kohlins recept</h1></header>
       <nav>
         <Navigation />
       </nav>
@@ -22,10 +23,28 @@ export default function Layout({ children }: Props) {
         {`
           .root {
             display: block;
-            padding: 4rem 0;
+            padding: 6rem 0;
             box-sizing: border-box;
             height: 100%;
           }
+          header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+            background-color: #FF6061;
+          }
+          header h1 {
+            text-align: center;  
+            font-size: 2.5rem;        
+            margin: 1rem 0 1rem 0;
+            -webkit-background-clip: text;
+            -moz-background-clip: text;
+            background-clip: text;
+            color: #fff;
+          }
+
           main {
             display: flex;
             min-height: 100%;
