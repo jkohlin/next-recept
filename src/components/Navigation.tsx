@@ -1,9 +1,12 @@
+import { GetStaticProps} from "next";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import Burger from "./Burger";
 import { useState } from "react";
+import { listTags, TagContent } from "../lib/tags";
 
 export default function Navigation() {
+  const tags = listTags()
   const router = useRouter();
   const [active, setActive] = useState(false);
   return (
@@ -13,20 +16,32 @@ export default function Navigation() {
         <ul>
           <li>
             <Link href="/">
-              <a className={router.pathname === "/" ? "active" : null}>Hem</a>
+              <a className={router.pathname === "/posts" ? "active" : null}>Hem</a>
             </Link>
           </li>
           <li>
-            <Link href="/posts">
+            <Link href="/posts/">
               <a
                 className={
-                  router.pathname.startsWith("/posts") ? "active" : null
+                  router.pathname.startsWith("/posts/") ? "active" : null
                 }
               >
-                Recept
+                Alla recept
               </a>
             </Link>
           </li>
+          <li>
+            <hr/>
+          </li>
+          {tags.map((tag, i) => {
+            const k = tag.slug + i
+            return (
+              <li key={k}>
+                <Link  href={`/posts/tags/${tag.slug}`}>
+                  <a className={router.pathname.startsWith(`/posts/tags/${tag.slug}`) ? "active" : null}>{tag.name}</a>
+                </Link>
+              </li>
+          )})}
         </ul>
         <style jsx>
           {`
@@ -90,3 +105,12 @@ export default function Navigation() {
     </>
   );
 }
+
+export const getStaticProps: GetStaticProps = async () => {
+  const tags = listTags();
+  return {
+    props: {
+      tags,
+    },
+  };
+};

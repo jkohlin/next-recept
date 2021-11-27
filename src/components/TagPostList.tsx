@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import Link from "next/link";
 import { PostContent } from "../lib/posts";
 import { TagContent } from "../lib/tags";
 import PostItem from "./PostItem";
@@ -14,18 +15,40 @@ type Props = {
   };
 };
 export default function TagPostList({ posts, tag, pagination }: Props) {
+  const searchBar = useRef(null);
+  let [filter, setFilter] = useState('');
+  
   useEffect(() => {
-    const userList = new List('receptlista', {valueNames: ['recept']});
-    userList.sort('recept', { order: "asc" })
-  } , [posts]);
+    const sortList = new List('receptlista', {valueNames: ['recept']});
+    sortList.sort('recept', { order: "asc" })
+    console.log('posts updated');
+    
+    return () => {
+      console.log('unmounted');
+      setFilter('');
+      if (searchBar && searchBar.current && searchBar.current.value) searchBar.current.value = '';
+    }
+  } , []);
 
+  useEffect(() => {
+    console.log('search updated');
+    
+  } , [filter]);
   return (
     <div className={"container"} id="receptlista">
       <h1>
-        All posts / <span>{tag.name}</span>
+        <Link href="/posts/"> 
+        <a href="">Alla recept</a>
+        </Link> 
+        / <span>{tag.name}</span>
       </h1>
+      <nav className="search-bar">
+        <input ref={searchBar} 
+        onChange={(ev: React.ChangeEvent<HTMLInputElement>,): void => setFilter(searchBar.current.value.toUpperCase())} 
+        type="text" className="filter" placeholder="sök recept" />
+      </nav>
       <ul className="list">
-        {posts.map((it, i) => (
+        {posts.filter((post)=>post.title.toUpperCase().includes(filter)).map((it, i) => (
           <li key={i}>
             <PostItem post={it} />
           </li>
@@ -51,6 +74,15 @@ export default function TagPostList({ posts, tag, pagination }: Props) {
             padding: 0 1.5rem;
             display: flex;
             flex-direction: column;
+          }
+          .search-bar {
+            width: 150px;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+          }
+          .search-bar > input {
+            padding: 0.5rem 1rem;
+            border-radius: 1.2rem;
           }
           h1 {
             margin: 0 0 2rem;
