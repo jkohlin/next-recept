@@ -37,12 +37,18 @@ export default function Layout({ children }: Props) {
           }
           header h1 {
             text-align: center;  
-            font-size: 2.5rem;        
-            margin: 1rem 0 1rem 0;
+            font-size: 2rem;        
+            margin: 1rem 0 1rem 58px;
             -webkit-background-clip: text;
             -moz-background-clip: text;
             background-clip: text;
             color: #fff;
+          }
+          @media (min-width: 769px) {
+            header h1 {
+              font-size: 2.5rem;        
+              margin: 1rem 0 1rem 0;
+            }
           }
 
           main {
