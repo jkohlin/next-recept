@@ -58,7 +58,7 @@ collections:
             label_singular: "Author"
             widget: list
             fields:
-              - label: "Slug"
+              - label: "Slug (inga åäö eller mellanslag)"
                 name: "slug"
                 widget: "string"
                 hint: "The part of a URL identifies the author"
