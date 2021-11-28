@@ -11,9 +11,10 @@ type Props = {
 };
 export default function Pagination({ current, pages, link }: Props) {
   const pagination = generatePagination(current, pages);
+  
   return (
     <ul>
-      {pagination.map((it, i) => (
+      {pagination.length > 1 && pagination.map((it, i) => (
         <li key={i}>
           {it.excerpt ? (
             "..."
